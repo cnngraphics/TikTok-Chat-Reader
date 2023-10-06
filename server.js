@@ -4,11 +4,11 @@ const rateLimit = require('axios-rate-limit');
 const proxyList = [
   'http://71.163.238.129:1236',
   'http://208.113.153.30:46293',
-  'http://64.90.52.19:55552'
+  'http://64.90.52.19:55552',
+  'http://172.105.156.59:63949',
+  'http://159.89.49.172:14061'
   // ...more proxies
 ];
-
-let joinMsgDelay = 0;  // Initialize before using
 
 // Create a rate-limited Axios instance: 1 request per 2 seconds
 const http = rateLimit(axios.create(), { maxRequests: 1, perMilliseconds: 2000 });

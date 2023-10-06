@@ -175,6 +175,7 @@ connection.on('like', (msg) => {
 connection.on('member', (msg) => {
     if (window.settings.showJoins === "0") return;
     let addDelay = 250;
+
     let joinMsgDelay = 0;  // Initialize before using
 
     if (joinMsgDelay > 500) addDelay = 100;
