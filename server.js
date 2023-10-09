@@ -79,6 +79,15 @@ const { clientBlocked } = require('./limiter');
 const app = express();
 const httpServer = createServer(app);
 
+// Added route for animation puppy
+app.use(express.static('public'));
+
+app.get('/public/image-animation', (req, res) => {
+  res.sendFile(__dirname + '/public/image-animation/index.html');
+});
+
+
+
 // Enable cross origin resource sharing
 const io = new Server(httpServer, {
   cors: {
@@ -88,6 +97,18 @@ const io = new Server(httpServer, {
 
 
 io.on('connection', (socket) => {
+
+  // code to push updates to the image_animation/index.html
+  console.log('New client connected');
+
+  // Listen to a custom event from the client
+  socket.on('giftReceived', () => {
+    // Broadcast to all connected clients
+    io.emit('startAnimation');
+  });
+
+  // end push to the image_animation/index.html
+
   let tiktokConnectionWrapper;
 
   console.info('New connection from origin', socket.handshake.headers['origin'] || socket.handshake.headers['referer']);
